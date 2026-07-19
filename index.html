@@ -17,18 +17,45 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="is-locked">
+    <audio id="bgMusic" src="assets/audio.mp3" loop preload="auto"></audio>
+    <div class="leaf-layer" id="leafLayer" aria-hidden="true"></div>
+    <section class="invitation-cover" id="invitationCover" aria-label="Шақыруды ашу">
+      <div class="cover-bg" aria-hidden="true"></div>
+      <div class="envelope" aria-hidden="true">
+        <div class="envelope__back"></div>
+        <div class="envelope__letter">
+          <span>Дарина</span>
+        </div>
+        <div class="envelope__front"></div>
+        <div class="envelope__flap"></div>
+      </div>
+      <div class="cover-content">
+        <button class="open-invite" id="openInvite" type="button">Шақыруды ашу</button>
+      </div>
+    </section>
+    <button class="music-toggle" id="musicToggle" type="button" aria-label="Музыканы қосу">
+      <span class="music-toggle__icon music-toggle__icon--play" aria-hidden="true"></span>
+      <span class="music-toggle__icon music-toggle__icon--pause" aria-hidden="true"></span>
+    </button>
     <main>
       <section class="hero" aria-labelledby="hero-title">
+        <span class="edge-smoke edge-smoke--left edge-smoke--top" aria-hidden="true"></span>
+        <span class="edge-smoke edge-smoke--right edge-smoke--middle" aria-hidden="true"></span>
         <div class="hero__shade"></div>
+        <div class="parallax-layer parallax-layer--hero parallax-slow" aria-hidden="true"></div>
+        <div class="parallax-layer parallax-layer--petal parallax-fast" aria-hidden="true"></div>
         <div class="hero__content">
           <p class="eyebrow">Қыз ұзату</p>
           <h1 id="hero-title">Дарина</h1>
-          <p class="hero__date">6 Қыркүйек, 2026 · Жексенбі · 19:00</p>
         </div>
+        <p class="hero__date">6 Қыркүйек, 2026 · Жексенбі · 19:00</p>
       </section>
 
       <section class="intro section">
+        <span class="edge-smoke edge-smoke--left edge-smoke--middle" aria-hidden="true"></span>
+        <span class="edge-smoke edge-smoke--right edge-smoke--bottom" aria-hidden="true"></span>
+        <div class="parallax-layer parallax-layer--left parallax-slow" aria-hidden="true"></div>
         <div class="section__inner narrow">
           <p class="section-kicker">Құрметті, қонақтар!</p>
           <p class="intro__text">
@@ -36,38 +63,51 @@
             дос-жарандар, әріптестер мен көршілер!
           </p>
           <p class="intro__text">
-            Сіздерді, аяулы <strong>Дарина</strong> қызымыздың ұзату тойына
-            арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!
+            Сіздерді, аяулы қызымыз <strong>Даринаның</strong> ата-анасының аялы алақанынан құтты босағасына шығарып салу рәсіміне арналған салтанатты ақ дастарханымыздың қадірлі қонағы болуына шақырамыз!
           </p>
         </div>
       </section>
 
-      <section class="details section" aria-labelledby="details-title">
+      <section class="details section" aria-label="Той салтанаты">
+        <span class="edge-smoke edge-smoke--right edge-smoke--top" aria-hidden="true"></span>
+        <span class="edge-smoke edge-smoke--left edge-smoke--bottom" aria-hidden="true"></span>
+        <div class="parallax-layer parallax-layer--right parallax-fast" aria-hidden="true"></div>
         <div class="section__inner">
           <div class="section-heading">
             <p class="section-kicker">Той салтанаты</p>
-            <h2 id="details-title">Ақ дастархан басында күтеміз</h2>
           </div>
 
           <div class="detail-grid">
             <article class="detail-card">
+              <span class="cloud-sticker cloud-sticker--left" aria-hidden="true"></span>
               <span class="detail-card__label">Күні</span>
               <strong>6 Қыркүйек, 2026</strong>
               <small>Жексенбі</small>
             </article>
             <article class="detail-card">
+              <span class="cloud-sticker cloud-sticker--right" aria-hidden="true"></span>
               <span class="detail-card__label">Уақыты</span>
               <strong>19:00</strong>
               <small>Қонақтарды қарсы алу</small>
             </article>
             <article class="detail-card">
+              <span class="cloud-sticker cloud-sticker--left" aria-hidden="true"></span>
               <span class="detail-card__label">Мекен жайы</span>
               <strong>Bereke Hall</strong>
               <small>Шұбарсу ауылы</small>
+              <a
+                class="map-link"
+                href="https://2gis.kz/shymkent/geo/70000001104004191"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Картадан ашу
+              </a>
             </article>
           </div>
 
           <div class="month-card" aria-label="Қыркүйек 2026 күнтізбесі">
+            <span class="cloud-sticker cloud-sticker--right" aria-hidden="true"></span>
             <div class="month-card__header">
               <span>Қыркүйек</span>
               <strong>2026</strong>
@@ -115,23 +155,16 @@
               <span>30</span>
             </div>
           </div>
-
-          <div class="actions">
-            <a
-              class="action-link"
-              href="https://2gis.kz/shymkent/geo/70000001104004191"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Картадан ашу
-            </a>
-          </div>
         </div>
       </section>
 
       <section class="countdown section" aria-label="Тойға дейін қалған уақыт">
+        <span class="edge-smoke edge-smoke--left edge-smoke--middle" aria-hidden="true"></span>
+        <span class="edge-smoke edge-smoke--right edge-smoke--middle edge-smoke--delay" aria-hidden="true"></span>
+        <div class="parallax-layer parallax-layer--center parallax-slow" aria-hidden="true"></div>
         <div class="section__inner">
           <div class="countdown__panel">
+            <span class="cloud-sticker cloud-sticker--left" aria-hidden="true"></span>
             <p class="section-kicker">Тойға дейін</p>
             <div class="timer" id="timer">
               <div><strong id="days">0</strong><span>күн</span></div>
@@ -144,14 +177,24 @@
       </section>
 
       <section class="hosts section">
+        <span class="edge-smoke edge-smoke--left edge-smoke--top edge-smoke--light" aria-hidden="true"></span>
+        <span class="edge-smoke edge-smoke--right edge-smoke--bottom edge-smoke--light" aria-hidden="true"></span>
         <div class="section__inner narrow">
           <p class="section-kicker">Той иелері</p>
-          <h2>Талғат · Эльмира</h2>
+          <h2 class="hosts-title">
+            <span>Талғат</span>
+            <span class="hosts-dot">·</span>
+            <span>Эльмира</span>
+          </h2>
         </div>
       </section>
 
       <section class="rsvp section" id="rsvp" aria-labelledby="rsvp-title">
+        <span class="edge-smoke edge-smoke--left edge-smoke--bottom" aria-hidden="true"></span>
+        <span class="edge-smoke edge-smoke--right edge-smoke--top" aria-hidden="true"></span>
+        <div class="parallax-layer parallax-layer--left parallax-fast" aria-hidden="true"></div>
         <div class="section__inner narrow">
+          <span class="cloud-sticker cloud-sticker--right" aria-hidden="true"></span>
           <p class="section-kicker">Жауап күтеміз</p>
           <h2 id="rsvp-title">Тойға келуіңізді растауыңызды сұраймыз</h2>
           <form class="rsvp-form" id="rsvpForm">
@@ -188,7 +231,6 @@
             </fieldset>
 
             <div class="form-actions">
-              <button type="submit">Жауап мәтінін дайындау</button>
               <a class="whatsapp-link" id="whatsappLink" href="#" target="_blank" rel="noreferrer">
                 WhatsApp арқылы жіберу
               </a>
@@ -199,8 +241,13 @@
       </section>
     </main>
 
-    <footer>
-      <p>Дарина · Қыз ұзату · 06.09.2026</p>
+    <footer class="farewell-footer">
+      <span class="edge-smoke edge-smoke--left edge-smoke--middle" aria-hidden="true"></span>
+      <span class="edge-smoke edge-smoke--right edge-smoke--middle edge-smoke--delay" aria-hidden="true"></span>
+      <div class="farewell-footer__inner">
+        <p class="footer-blessing">Ақ дастархан басында күтеміз</p>
+      </div>
+      <p class="site-credit">Сайтты жасаған Дарина</p>
     </footer>
 
     <script src="script.js"></script>
