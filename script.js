@@ -1,4 +1,4 @@
-const weddingDate = new Date("2026-09-06T18:00:00+05:00");
+const weddingDate = new Date("2026-09-06T19:00:00+05:00");
 
 const parts = {
   days: document.getElementById("days"),
@@ -72,27 +72,4 @@ whatsappLink.addEventListener("click", (event) => {
     event.preventDefault();
     result.textContent = "Алдымен аты-жөніңізді жазып, жауап мәтінін дайындаңыз.";
   }
-});
-
-document.getElementById("calendarButton").addEventListener("click", () => {
-  const ics = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "BEGIN:VEVENT",
-    "SUMMARY:Дарина - Қыз ұзату",
-    "DTSTART:20260906T130000Z",
-    "DTEND:20260906T180000Z",
-    "LOCATION:Шұбарсу ауылы, Bereke Hall мейрамханасы",
-    "DESCRIPTION:Даринаның қыз ұзату тойы",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n");
-
-  const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "darina-uzatu.ics";
-  link.click();
-  URL.revokeObjectURL(url);
 });

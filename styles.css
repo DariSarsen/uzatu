@@ -244,6 +244,69 @@ h2 {
   font-size: 0.96rem;
 }
 
+.month-card {
+  width: min(620px, 100%);
+  margin: 1.25rem auto 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background: rgba(255, 253, 248, 0.82);
+  box-shadow: var(--shadow);
+}
+
+.month-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--sage-dark);
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.month-card__header span {
+  font-size: clamp(2.1rem, 7vw, 3.4rem);
+  font-weight: 700;
+}
+
+.month-card__header strong {
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.calendar-grid span,
+.calendar-grid strong {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.calendar-grid strong {
+  color: #fffdf8;
+  background: var(--berry);
+  box-shadow: 0 10px 24px rgba(125, 47, 73, 0.24);
+}
+
+.calendar-grid--weekdays {
+  margin-bottom: 0.35rem;
+}
+
+.calendar-grid--weekdays span {
+  aspect-ratio: auto;
+  color: var(--gold);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 .actions,
 .form-actions {
   display: flex;
