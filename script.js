@@ -6,6 +6,8 @@ const leafLayer = document.getElementById("leafLayer");
 const parallaxLayers = document.querySelectorAll(".parallax-layer");
 const sparklePath =
   "M1.1 2 8.05 7.07C8.3 6.85 8.4 6.85 8.76 6.65L5.8 1.8 8.9 6.56C10.3 5.82 11.5 6.15 12.36 6.65L13.6 5 12.44 6.7C13 7 13.5 7.8 13.65 8.48L15.7 8.1 13.67 8.57C13.74 9 13.77 10 13.25 11.1L20.4 16.78 13.07 11.3C12.6 11.54 12.4 11.63 12.22 11.73L16.7 18.9 12.09 11.81C11.3 12.3 9.9 12.4 8.74 11.64L7.3 13.4 8.66 11.57C8.296 11.2 7.84 10.9 7.53 9.82L6 10.1 7.52 9.77C7.37 9.2 7.3 8.5 7.86 7.28ZM8.1 7.5C7.25 8.55 7.42 9.2 7.55 9.76L9.97 9.2 8.3 8.5 9.7 8.9ZM8.26 7.27 9.75 8.2 8.81 6.76C8.35 7.1 8.35 7.2 8.26 7.27ZM12.33 6.69C11 5.99 10 5.99 8.97 6.67L10.5 8.55 10.57 7.2 10.7 8.7ZM10.9 9 13.63 8.488C13.4 7.6 12.98 7.09 12.42 6.73ZM13 10.89C13.9 10 13.65 8.7 13.645 8.577L11 9.2 13.2 9.9 11.4 9.5ZM11.1 9.94 12.18 11.67C12.3 11.6 12.4 11.6 12.8 11.1ZM10.2 9.4 7.57 9.81C7.8 10.8 8.3 11.18 8.679 11.54ZM10.45 9.6 8.77 11.6C9.9 12.3 11.2 12.3 12.06 11.74L10.7 9.8 10.56 11.7ZM4.7 9.6A1 1 0 105.5 11 1.1 1.1 0 114.7 9.6Z";
+const heartSvg =
+  '<svg viewBox="0 0 32 29" aria-hidden="true"><path d="M16 28.2 4.1 16.9C1.5 14.4.2 11.9.2 9.4.2 4.8 3.7 1.3 8.2 1.3c2.7 0 5.1 1.3 6.6 3.3C16.4 2.6 18.8 1.3 21.5 1.3c4.5 0 8.3 3.5 8.3 8.1 0 2.5-1.3 5-3.9 7.5L16 28.2Zm0-3.6 7.9-7.6c2.1-2 3.2-3.8 3.2-5.5 0-3-2.4-5.3-5.5-5.3-2.4 0-4.4 1.4-5.3 3.6h-.6c-.9-2.2-2.9-3.6-5.3-3.6-3.1 0-5.5 2.3-5.5 5.3 0 1.7 1.1 3.5 3.2 5.5l7.9 7.6Z"/></svg>';
 
 const parts = {
   days: document.getElementById("days"),
@@ -122,6 +124,21 @@ function createSparkles() {
   });
 }
 
+function createCornerHearts() {
+  const heartTargets = document.querySelectorAll(
+    ".intro .section__inner, .hosts .section__inner, .farewell-footer__inner",
+  );
+
+  heartTargets.forEach((target) => {
+    ["top", "bottom"].forEach((position) => {
+      const heart = document.createElement("span");
+      heart.className = `corner-heart corner-heart--${position}`;
+      heart.innerHTML = heartSvg;
+      target.appendChild(heart);
+    });
+  });
+}
+
 function setupRevealEffects() {
   const revealItems = document.querySelectorAll(
     ".intro .section__inner, .section-heading, .detail-card, .month-card, .countdown__panel, .hosts .section__inner, .rsvp .section__inner, .farewell-footer__inner",
@@ -172,6 +189,7 @@ function scheduleParallaxUpdate() {
 
 createLeaves();
 createSparkles();
+createCornerHearts();
 setupRevealEffects();
 updateParallaxLayers();
 window.addEventListener("scroll", scheduleParallaxUpdate, { passive: true });
@@ -180,18 +198,34 @@ window.addEventListener("resize", scheduleParallaxUpdate);
 const form = document.getElementById("rsvpForm");
 const result = document.getElementById("rsvpResult");
 const whatsappLink = document.getElementById("whatsappLink");
+const partnerField = document.getElementById("partnerField");
+const partnerNameInput = document.getElementById("partnerName");
 whatsappLink.setAttribute("aria-disabled", "true");
 
 function buildMessage() {
   const name = document.getElementById("guestName").value.trim();
   const attendance = new FormData(form).get("attendance");
-  return `Сәлеметсіз бе! Менің атым-жөнім: ${name}. Даринаның ұзату тойына жауабым: ${attendance}.`;
+  const partnerName = partnerNameInput.value.trim();
+  const partnerText = attendance === "Жұбайыммен келемін" ? ` Жұбайымның аты-жөні: ${partnerName}.` : "";
+  return `Сәлеметсіз бе! Менің атым-жөнім: ${name}. Даринаның ұзату тойына жауабым: ${attendance}.${partnerText}`;
+}
+
+function updatePartnerField() {
+  const withPartner = new FormData(form).get("attendance") === "Жұбайыммен келемін";
+  partnerField.classList.toggle("is-visible", withPartner);
+  partnerNameInput.required = withPartner;
+
+  if (!withPartner) {
+    partnerNameInput.value = "";
+  }
 }
 
 function updateWhatsappLink() {
   const name = document.getElementById("guestName").value.trim();
+  const attendance = new FormData(form).get("attendance");
+  const partnerName = partnerNameInput.value.trim();
 
-  if (!name) {
+  if (!name || (attendance === "Жұбайыммен келемін" && !partnerName)) {
     whatsappLink.href = "#";
     whatsappLink.classList.remove("is-ready");
     whatsappLink.setAttribute("aria-disabled", "true");
@@ -202,10 +236,14 @@ function updateWhatsappLink() {
   whatsappLink.href = `https://wa.me/77066015891?text=${encodeURIComponent(message)}`;
   whatsappLink.classList.add("is-ready");
   whatsappLink.setAttribute("aria-disabled", "false");
+  result.textContent = "";
 }
 
 form.addEventListener("input", updateWhatsappLink);
-form.addEventListener("change", updateWhatsappLink);
+form.addEventListener("change", () => {
+  updatePartnerField();
+  updateWhatsappLink();
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -216,6 +254,15 @@ whatsappLink.addEventListener("click", (event) => {
 
   if (whatsappLink.getAttribute("aria-disabled") === "true") {
     event.preventDefault();
-    result.textContent = "Өтінеміз, алдымен аты-жөніңізді жазыңыз.";
+    const name = document.getElementById("guestName").value.trim();
+    const attendance = new FormData(form).get("attendance");
+    const partnerName = partnerNameInput.value.trim();
+    result.textContent = !name
+      ? "Өтінеміз, алдымен аты-жөніңізді жазыңыз."
+      : attendance === "Жұбайыммен келемін" && !partnerName
+        ? "Өтінеміз, жұбайыңыздың аты-жөнін жазыңыз."
+        : "";
   }
 });
+
+updatePartnerField();

@@ -110,6 +110,37 @@ body.invite-opened .leaf-layer {
   overflow: hidden;
 }
 
+.corner-heart {
+  position: absolute;
+  z-index: 5;
+  width: var(--heart-size, 24px);
+  height: var(--heart-size, 24px);
+  pointer-events: none;
+  color: rgba(189, 143, 69, 0.72);
+  filter: drop-shadow(0 0 8px rgba(189, 143, 69, 0.22));
+  opacity: 0.78;
+}
+
+.corner-heart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.corner-heart--top {
+  top: 0.85rem;
+  left: 0.85rem;
+  color: rgba(125, 47, 73, 0.38);
+  transform: rotate(-12deg);
+}
+
+.corner-heart--bottom {
+  right: 0.85rem;
+  bottom: 0.85rem;
+  transform: rotate(13deg) scale(1.08);
+}
+
 @keyframes sparkle-twinkle {
   0%,
   100% {
@@ -646,6 +677,7 @@ body.invite-opened .music-toggle {
 
 .hero__shade {
   position: absolute;
+  z-index: 0;
   inset: 0;
   background:
     radial-gradient(circle at center, rgba(255, 249, 239, 0.42), rgba(255, 249, 239, 0.72) 44%, rgba(255, 249, 239, 0.25)),
@@ -679,6 +711,15 @@ body.invite-opened .music-toggle {
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
+}
+
+.hero__divider {
+  display: block;
+  width: min(220px, 44vw);
+  height: auto;
+  margin: 2.5rem auto 0.25rem;
+  opacity: 0.78;
+  filter: drop-shadow(0 8px 18px rgba(189, 143, 69, 0.18));
 }
 
 h1,
@@ -798,10 +839,57 @@ h2 {
   color: var(--berry);
 }
 
+.intro {
+  min-height: min(760px, 82svh);
+  display: grid;
+  align-items: center;
+}
+
+.intro::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: max(-5rem, -5vw);
+  top: 50%;
+  bottom: auto;
+  width: min(42vw, 520px);
+  aspect-ratio: 2 / 3;
+  pointer-events: none;
+  background-image: url("assets/darina-uzatu-portrait.png");
+  background-position: center bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.11;
+  filter: saturate(0.78) sepia(0.18);
+  mix-blend-mode: multiply;
+  transform: translateY(-50%);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 18%, #000 70%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 24%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 18%, #000 70%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 24%, #000 100%);
+  mask-composite: intersect;
+}
+
 .details {
+  position: relative;
   background:
     linear-gradient(90deg, rgba(127, 146, 115, 0.12), transparent 28%, transparent 72%, rgba(201, 135, 143, 0.14)),
     rgba(255, 252, 246, 0.72);
+}
+
+.details::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.74), rgba(255, 249, 239, 0.56)),
+    url("assets/evc.png") left 1.25rem top 1.25rem / min(90vw, 620px) auto no-repeat;
+  opacity: 0.72;
 }
 
 .section-heading {
@@ -983,8 +1071,36 @@ h2 {
 }
 
 .countdown {
+  position: relative;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
+}
+
+.countdown::before,
+.countdown::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  width: min(20vw, 300px);
+  height: calc(100% - 1.5rem);
+  pointer-events: none;
+  background-image: url("assets/lenta.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.78;
+  filter: saturate(1.08) sepia(0.06) drop-shadow(0 14px 28px rgba(74, 49, 25, 0.12));
+}
+
+.countdown::before {
+  left: max(0.25rem, 1.5vw);
+  transform: translateY(-50%);
+}
+
+.countdown::after {
+  right: max(0.25rem, 1.5vw);
+  transform: translateY(-50%) scaleX(-1);
 }
 
 .countdown__panel {
@@ -1076,6 +1192,40 @@ h2 {
   position: relative;
 }
 
+.rsvp-flower {
+  position: absolute;
+  z-index: 0;
+  width: min(24vw, 180px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background-image: url("assets/flower.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.72;
+  filter: drop-shadow(0 18px 30px rgba(74, 49, 25, 0.12));
+}
+
+.rsvp-flower--top {
+  top: -3rem;
+  left: -4rem;
+  transform: rotate(-12deg);
+}
+
+.rsvp-flower--bottom {
+  right: -4rem;
+  bottom: -3.2rem;
+  transform: scaleX(-1) rotate(-10deg);
+}
+
+.rsvp .section-kicker,
+.rsvp h2,
+.rsvp-form,
+.rsvp-result {
+  position: relative;
+  z-index: 1;
+}
+
 .rsvp-form label span,
 legend {
   color: var(--sage-dark);
@@ -1120,6 +1270,29 @@ input[type="radio"] {
   width: 1.1rem;
   height: 1.1rem;
   accent-color: var(--berry);
+}
+
+.partner-field {
+  display: grid;
+  max-height: 0;
+  margin-top: -1.1rem;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition:
+    max-height 320ms ease,
+    margin-top 320ms ease,
+    opacity 260ms ease,
+    transform 320ms ease;
+}
+
+.partner-field.is-visible {
+  max-height: 110px;
+  margin-top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .whatsapp-link {
@@ -1178,11 +1351,28 @@ input[type="radio"] {
 }
 
 .footer-blessing {
+  position: relative;
+  z-index: 1;
   margin: 0 0 1.1rem;
   color: var(--sage-dark);
   font-family: "KZ Boyarsky", "Cormorant Garamond", Georgia, serif;
   font-size: clamp(2.7rem, 9vw, 5.8rem);
   line-height: 1;
+}
+
+.farewell-footer__inner .corner-heart {
+  z-index: 0;
+  opacity: 0.48;
+}
+
+.farewell-footer__inner .corner-heart--top {
+  top: -2.2rem;
+  left: -1.9rem;
+}
+
+.farewell-footer__inner .corner-heart--bottom {
+  right: -1.9rem;
+  bottom: -1.45rem;
 }
 
 .site-credit {
@@ -1220,6 +1410,26 @@ input[type="radio"] {
     padding-top: 0;
   }
 
+  .intro {
+    min-height: auto;
+    display: block;
+  }
+
+  .intro::after {
+    top: 50%;
+    right: -28vw;
+    bottom: auto;
+    width: 86vw;
+    opacity: 0.12;
+    transform: translateY(-42%);
+  }
+
+  .details::before {
+    background:
+      linear-gradient(180deg, rgba(255, 249, 239, 0.78), rgba(255, 249, 239, 0.62)),
+      url("assets/evc.png") left -2rem top 1rem / min(82vw, 380px) auto no-repeat;
+  }
+
   h1 {
     font-size: clamp(4rem, 19vw, 8rem);
   }
@@ -1232,7 +1442,52 @@ input[type="radio"] {
     font-size: clamp(2.2rem, 10vw, 4rem);
   }
 
-  .detail-grid,
+  .hero__divider {
+    width: min(180px, 50vw);
+  }
+
+  .countdown::before,
+  .countdown::after {
+    top: 50%;
+    width: 42vw;
+    height: calc(100% - 0.5rem);
+    opacity: 0.72;
+  }
+
+  .countdown::before {
+    left: -21vw;
+  }
+
+  .countdown::after {
+    right: -21vw;
+  }
+
+  .rsvp-flower {
+    width: min(42vw, 150px);
+    opacity: 0.58;
+  }
+
+  .rsvp-flower--top {
+    top: -2.2rem;
+    left: -2.7rem;
+  }
+
+  .rsvp-flower--bottom {
+    right: -2.7rem;
+    bottom: -2.4rem;
+  }
+
+  .detail-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .detail-card {
+    flex: 0 1 calc((100% - 1rem) / 2);
+    width: calc((100% - 1rem) / 2);
+  }
+
   .timer {
     grid-template-columns: 1fr 1fr;
   }
@@ -1306,6 +1561,14 @@ input[type="radio"] {
     grid-template-columns: 1fr;
   }
 
+  .detail-grid {
+    display: grid;
+  }
+
+  .detail-card {
+    width: 100%;
+  }
+
   .actions,
   .form-actions {
     display: grid;
@@ -1370,6 +1633,16 @@ input[type="radio"] {
 
   .footer-blessing {
     font-size: clamp(2.35rem, 13vw, 3.7rem);
+  }
+
+  .farewell-footer__inner .corner-heart--top {
+    top: -1.7rem;
+    left: -0.2rem;
+  }
+
+  .farewell-footer__inner .corner-heart--bottom {
+    right: -0.2rem;
+    bottom: -1.35rem;
   }
 
   .site-credit {
