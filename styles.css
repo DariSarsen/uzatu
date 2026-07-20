@@ -927,11 +927,17 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.52), transparent 42%, rgba(189, 143, 69, 0.16)),
     linear-gradient(90deg, transparent, rgba(189, 143, 69, 0.08), transparent);
   opacity: 0;
   transition: opacity 260ms ease;
+}
+
+.detail-card > :not(.block-sparkles):not(.cloud-sticker) {
+  position: relative;
+  z-index: 3;
 }
 
 .detail-card:hover,
